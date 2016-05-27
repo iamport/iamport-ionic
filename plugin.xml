@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  id="cordova-plugin-iamport"
+  version="0.7.0">
+
+    <name>IonicIamport</name>
+    <description>Payment Plugin using Iamport</description>
+    <author>SIOT</author>
+    <license>MIT</license>
+    <keywords>payment,iamport</keywords>
+    <engines>
+        <engine name="cordova" version=">=3.1.0" />
+    </engines>
+    <dependency id="cordova-plugin-customurlscheme" url="https://github.com/EddyVerbruggen/Custom-URL-scheme"/>
+    <dependency id="cordova-plugin-inappbrowser" url="https://github.com/apache/cordova-plugin-inappbrowser"/>
+
+    <asset src="www/iamport-checkout.html" target="iamport-checkout.html"></asset>
+    <asset src="www/js/jquery-1.12.4.min.js" target="js/jquery-1.12.4.min.js"></asset>
+
+    <js-module src="www/js/ng-cordova-iamport.js" name="Iamport">
+        <clobbers target="ngCordova.plugins" />
+    </js-module>
+
+    <platform name="ios"></platform>
+    <platform name="android"></platform>
+
+</plugin>
