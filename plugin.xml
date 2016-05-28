@@ -18,7 +18,7 @@
     <asset src="www/js/jquery-1.12.4.min.js" target="js/jquery-1.12.4.min.js"></asset>
 
     <js-module src="www/js/ng-cordova-iamport.js" name="Iamport">
-        <clobbers target="ngCordova.plugins" />
+        <clobbers target="cordova.Iamport" />
     </js-module>
 
     <platform name="ios"></platform>
