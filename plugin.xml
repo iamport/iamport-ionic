@@ -8,6 +8,9 @@
     <author>SIOT</author>
     <license>MIT</license>
     <keywords>payment,iamport</keywords>
+
+    <preference name="URL_SCHEME" /> <!-- https://github.com/EddyVerbruggen/Custom-URL-scheme 설치를 위해 preference를 전달함 -->
+
     <engines>
         <engine name="cordova" version=">=3.1.0" />
     </engines>
