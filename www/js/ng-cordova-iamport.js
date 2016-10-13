@@ -28,7 +28,7 @@
 
         param.m_redirect_url = m_redirect_url;//강제로 변환
 
-        var inAppBrowserRef = cordova.InAppBrowser.open(payment_url, '_blank', 'hardwareback=no');
+        var inAppBrowserRef = cordova.InAppBrowser.open(payment_url, '_blank', 'location=no,hardwareback=no');
 
         if (param.pg == 'kakao') {
           if (ionic.Platform.isAndroid())
