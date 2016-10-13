@@ -30,9 +30,18 @@
 
         var inAppBrowserRef = cordova.InAppBrowser.open(payment_url, '_blank', 'location=no,hardwareback=no');
 
+        if (param.pg == 'kakao') {
+          if (ionic.Platform.isAndroid())
+            navigator.app.exitApp();
+          if (ionic.Platform.isIOS())
+            setTimeout(function () {
+              inAppBrowserRef.close();
+            }, 2000);
+        }
+
         inAppBrowserRef.addEventListener('loadstart', function (event) {
           if ((event.url).indexOf(m_redirect_url) === 0) { //결제 끝.
-            var query = (event.url).substring(m_redirect_url.length + 1) // m_redirect_url+? 뒤부터 자름
+            var query = (event.url).substring(m_redirect_url.length + 1); // m_redirect_url+? 뒤부터 자름
             var data = parseQuery(query); //query data
 
             deferred.resolve(data);
@@ -53,7 +62,9 @@
           }
         });
         inAppBrowserRef.addEventListener('exit', function (event) {
-          deferred.reject("사용자가 결제를 취소하였습니다.");
+          if (param.pg == 'kakao')
+            deferred.resolve({});
+          else deferred.reject("사용자가 결제를 취소하였습니다.");
         });
 
         inAppBrowserRef.show();
