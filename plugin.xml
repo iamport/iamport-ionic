@@ -3,36 +3,41 @@
         id="cordova-plugin-iamport"
         version="0.7.0">
 
-    <name>IonicIamport</name>
-    <description>Payment Plugin using Iamport</description>
-    <author>SIOT</author>
-    <license>MIT</license>
-    <keywords>payment,iamport</keywords>
+  <name>IonicIamport</name>
+  <description>Payment Plugin using Iamport</description>
+  <author>SIOT</author>
+  <license>MIT</license>
+  <keywords>payment,iamport</keywords>
 
-    <preference name="URL_SCHEME"/> <!-- https://github.com/EddyVerbruggen/Custom-URL-scheme 설치를 위해 preference를 전달함 -->
+  <preference name="URL_SCHEME"/> <!-- https://github.com/EddyVerbruggen/Custom-URL-scheme 설치를 위해 preference를 전달함 -->
 
-    <engines>
-        <engine name="cordova" version=">=3.1.0"/>
-    </engines>
-    <dependency id="cordova-plugin-customurlscheme" url="https://github.com/EddyVerbruggen/Custom-URL-scheme"/>
-    <dependency id="cordova-plugin-inappbrowser" url="https://github.com/zxshinxz/cordova-plugin-inappbrowser.git"/>
+  <engines>
+    <engine name="cordova" version=">=3.1.0"/>
+  </engines>
+  <dependency id="cordova-plugin-customurlscheme" url="https://github.com/EddyVerbruggen/Custom-URL-scheme"/>
+  <dependency id="cordova-plugin-inappbrowser" url="https://github.com/zxshinxz/cordova-plugin-inappbrowser.git"/>
 
-    <asset src="www/iamport-checkout.html" target="iamport-checkout.html"></asset>
-    <asset src="www/js/jquery-1.12.4.min.js" target="js/jquery-1.12.4.min.js"></asset>
-    <asset src="www/js/ng-cordova-iamport.js" target="js/ng-cordova-iamport.js"></asset>
+  <asset src="www/iamport-checkout.html" target="iamport-checkout.html"></asset>
+  <asset src="www/js/jquery-1.12.4.min.js" target="js/jquery-1.12.4.min.js"></asset>
+  <asset src="www/js/ng-cordova-iamport.js" target="js/ng-cordova-iamport.js"></asset>
 
-    <platform name="ios">
-        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
-            <array>
-                <dict>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>kakao</string>
-                    </array>
-                </dict>
-            </array>
-        </config-file>
-    </platform>
-    <platform name="android"></platform>
+  <platform name="ios">
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>kakao</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>kakao</string>
+      </array>
+    </config-file>
+  </platform>
+  <platform name="android"></platform>
 
 </plugin>
