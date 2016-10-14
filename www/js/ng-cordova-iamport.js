@@ -1,3 +1,14 @@
+function handleOpenURL(url) {
+  var status = url.replace('ioniciamport://', '');
+
+  var event = new CustomEvent('kpay', {detail: {browser: inAppBrowserRef, url: url, status: status}});
+
+  // target can be any Element or other EventTarget.
+  document.dispatchEvent(event);
+}
+
+var inAppBrowserRef;
+
 (function () {
   'use strict';
 
@@ -28,11 +39,18 @@
 
         param.m_redirect_url = m_redirect_url;//강제로 변환
 
-        var inAppBrowserRef = cordova.InAppBrowser.open(payment_url, '_blank', 'location=no,hardwareback=no');
+        inAppBrowserRef = cordova.InAppBrowser.open(payment_url, '_blank', 'location=no,hardwareback=no');
+
+        var pg = param.pg;
+
+        if (pg == 'kakao') {
+          if (ionic.Platform.isAndroid())
+            navigator.app.exitApp();
+        }
 
         inAppBrowserRef.addEventListener('loadstart', function (event) {
           if ((event.url).indexOf(m_redirect_url) === 0) { //결제 끝.
-            var query = (event.url).substring(m_redirect_url.length + 1) // m_redirect_url+? 뒤부터 자름
+            var query = (event.url).substring(m_redirect_url.length + 1); // m_redirect_url+? 뒤부터 자름
             var data = parseQuery(query); //query data
 
             deferred.resolve(data);
@@ -53,7 +71,8 @@
           }
         });
         inAppBrowserRef.addEventListener('exit', function (event) {
-          deferred.reject("사용자가 결제를 취소하였습니다.");
+          if (pg != 'kakao')
+            deferred.reject("사용자가 결제를 취소하였습니다.");
         });
 
         inAppBrowserRef.show();
