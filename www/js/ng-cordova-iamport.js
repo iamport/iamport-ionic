@@ -1,13 +1,7 @@
 function handleOpenURL(url) {
-
   var status = url.replace('ioniciamport://', '');
 
-  var event = new CustomEvent('kpay', {browser: inAppBrowserRef, detail: {url: url, status: status}});
-
-  // // Listen for the event.
-  // elem.addEventListener('build', function (e) {
-  //   // e.target matches elem
-  // }, false);
+  var event = new CustomEvent('kpay', {detail: {browser: inAppBrowserRef, url: url, status: status}});
 
   // target can be any Element or other EventTarget.
   document.dispatchEvent(event);
@@ -47,7 +41,9 @@ var inAppBrowserRef;
 
         inAppBrowserRef = cordova.InAppBrowser.open(payment_url, '_blank', 'location=no,hardwareback=no');
 
-        if (param.pg == 'kakao') {
+        var pg = param.pg;
+
+        if (pg == 'kakao') {
           if (ionic.Platform.isAndroid())
             navigator.app.exitApp();
         }
@@ -75,9 +71,8 @@ var inAppBrowserRef;
           }
         });
         inAppBrowserRef.addEventListener('exit', function (event) {
-          if (param.pg == 'kakao')
-            deferred.resolve({});
-          else deferred.reject("사용자가 결제를 취소하였습니다.");
+          if (pg != 'kakao')
+            deferred.reject("사용자가 결제를 취소하였습니다.");
         });
 
         inAppBrowserRef.show();
