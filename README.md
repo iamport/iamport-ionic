@@ -74,8 +74,21 @@ angular.controller('SomethingCtrl', function($scope, $http, $cordovaIamport) {
 ### 앱으로 돌아 오고나서 이벤트
 앱으로 돌아 온 후 결제에 대한 앱 Logic을 등록 해주시면 됩니다.
 
+
+
 ```javascript
 // After Kakaopay payment done
+// Event object def:
+//{
+//  detail: {
+//    browser: inAppBrowserRef,  inAppBrowser에 reference
+//    url: url,                  불려진 callbackUrl
+//    status: status             callbackUrl로 돌아온 결제 상태
+//  }
+//}
+//
+//
+
 $document[0].addEventListener('kpay', function (e) {
 
       if (e && e.detail && e.detail.browser) {
