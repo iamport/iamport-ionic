@@ -97,7 +97,7 @@ $document[0].addEventListener('kpay', function (e) {
         });
       }
 
-       // Application Kakopay handling logic goes here
+       // Application KakaoPay handling logic goes here
        // ...
        // ...
 
